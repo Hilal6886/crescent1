@@ -11,14 +11,20 @@ const LoginPage = () => {
   const { isLoaded, isSignedIn, user } = useUser();
 
   const router = useRouter();
-
   useEffect(() => {
-    const role = user?.publicMetadata.role;
-
-    if (role) {
-      router.push(`/${role}`);
+    if (isLoaded && isSignedIn) {
+      const role = user?.publicMetadata?.role;
+      console.log("User Role:", role); // Ensure role is correctly logged
+  
+      if (role) {
+        router.push(`/${role}`); // Redirect to the role-based page
+      } else {
+        console.log("No role found, redirecting to home"); 
+        router.push("/home"); // Redirect to default route if no role is found
+      }
     }
-  }, [user, router]);
+  }, [isLoaded, isSignedIn, user, router]);
+  
 
   return (
     <div className="h-screen flex items-center justify-center bg-lamaSkyLight">
@@ -29,7 +35,7 @@ const LoginPage = () => {
         >
           <h1 className="text-xl font-bold flex items-center gap-2">
             <Image src="/logo.png" alt="" width={24} height={24} />
-            SchooLama
+            CRESCENT SCHOOL
           </h1>
           <h2 className="text-gray-400">Sign in to your account</h2>
           <Clerk.GlobalError className="text-sm text-red-400" />
