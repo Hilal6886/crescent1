@@ -1,11 +1,5 @@
 {
-    "build": {
-      "env": {
-        "DATABASE_URL": "your-database-url"
-      },
-      "commands": {
-        "build": "npm run build && npx prisma generate"
-      }
-    }
+  "env": {
+    "DATABASE_URL": "postgresql://crescent:crescent123456@localhost:5432/school?schema=public"
   }
-  
+}
